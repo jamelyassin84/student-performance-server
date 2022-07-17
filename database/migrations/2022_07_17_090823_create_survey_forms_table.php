@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('survey_forms', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->increments('id');
             $table->timestamps();
             $table->string('name');
             $table->string('question_type')->default(QuestionTypeEnum::BUTTON());

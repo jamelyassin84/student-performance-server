@@ -18,5 +18,6 @@ class Student extends Model
         'course',
         'major',
         'address',
+        'user_id',
     ];
 }

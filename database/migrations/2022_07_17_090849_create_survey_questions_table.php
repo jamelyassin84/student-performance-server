@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('survey_questions', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->increments('id');
             $table->string('survey_forms_id');
             $table->timestamps();
             $table->string('title');

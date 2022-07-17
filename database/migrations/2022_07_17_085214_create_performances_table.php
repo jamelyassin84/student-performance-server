@@ -17,7 +17,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('performances', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->increments('id');
             $table->timestamps();
             $table->string('student_id');
             $table->string('year_level')->default(YearLevelEnum::FIRST());
