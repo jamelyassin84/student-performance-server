@@ -16,11 +16,12 @@ return new class extends Migration
     {
         Schema::create('survey_questions', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('survey_forms_id');
             $table->timestamps();
             $table->string('title');
             $table->text('question');
             $table->tinyInteger('show_on_website');
-            $table->string('question_value_type')->default(QuestionValueTypeEnum::POSITIVE);
+            $table->string('question_value_type')->default(QuestionValueTypeEnum::POSITIVE());
         });
     }
 

@@ -15,9 +15,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary()->index();
+            $table->string('user_id');
             $table->timestamps();
-            $table->foreignIdFor(User::class)->constrained();
         });
     }
 

@@ -19,9 +19,9 @@ return new class extends Migration
         Schema::create('performances', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->foreignIdFor(Student::class)->constrained();
-            $table->string('year_level')->default(YearLevelEnum::FIRST);
-            $table->string('semester')->default(SemesterEnum::FIRST);
+            $table->string('student_id');
+            $table->string('year_level')->default(YearLevelEnum::FIRST());
+            $table->string('semester')->default(SemesterEnum::FIRST());
             $table->integer('performance');
         });
     }
