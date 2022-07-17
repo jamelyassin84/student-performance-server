@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::prefix('auth')->as('auth.')->controller(AuthController::class)->group(fun
     Route::post('register', 'register')->name('register');
     Route::post('login', 'login')->name('login');
 });
+
+Route::resource('students', StudentController::class);

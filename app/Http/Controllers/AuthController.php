@@ -33,8 +33,10 @@ class AuthController extends Controller
 
     protected static function user($user)
     {
+        $user->student = Student::where('user_id', $user->id)->first();
+
         return [
-            'user' => $user,
+            'user' =>  $user,
             'token' =>  self::updateToken($user->id),
             'message' => 'Signed-in',
         ];
@@ -79,7 +81,6 @@ class AuthController extends Controller
 
         $user->student =  Student::create([
             'user_id' => $user->id,
-
             'name' => $data->name,
             'sex' => $data->sex,
             'phone' => $data->phone,
