@@ -44,7 +44,6 @@ class AuthController extends Controller
     {
         $user = User::find($id)->first();
 
-
         $ip = request()->ip();
 
         $token = $user->createToken("{$user->name}|{$ip}", $abilities);
@@ -70,13 +69,17 @@ class AuthController extends Controller
 
         if (!empty($data)) return response('Email has already been taken', 402);
 
-        $user = User::create($request->all());
-
         $data = (object) $request->all();
+
+        $user = User::create([
+            'email' => $data->email,
+            'type' => UserEnum::STUDENT,
+            'password' => Hash::make($data->password)
+        ]);
 
         $user->student =  Student::create([
             'user_id' => $user->id,
-            'type' => UserEnum::STUDENT,
+
             'name' => $data->name,
             'sex' => $data->sex,
             'phone' => $data->phone,
