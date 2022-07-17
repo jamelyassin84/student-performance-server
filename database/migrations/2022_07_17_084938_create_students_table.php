@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\UserEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,13 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('type')->default(UserEnum::STUDENT);
-            $table->rememberToken();
             $table->timestamps();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->string('name');
+            $table->string('sex');
+            $table->string('phone');
+            $table->string('department');
+            $table->string('degree');
+            $table->string('course');
+            $table->string('major');
+            $table->string('address');
         });
     }
 
@@ -31,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('students');
     }
 };

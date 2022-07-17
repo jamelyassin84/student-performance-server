@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\UserEnum;
+use App\Enums\QuestionValueTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,13 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('survey_questions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('type')->default(UserEnum::STUDENT);
-            $table->rememberToken();
             $table->timestamps();
+            $table->string('title');
+            $table->text('question');
+            $table->tinyInteger('show_on_website');
+            $table->string('question_value_type')->default(QuestionValueTypeEnum::POSITIVE);
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('survey_questions');
     }
 };
