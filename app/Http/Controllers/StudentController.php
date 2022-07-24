@@ -6,6 +6,8 @@ use App\Enums\UserEnum;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Performance;
+use App\Models\SurveyQuestions;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -64,5 +66,23 @@ class StudentController extends Controller
         User::find($id)->delete();
 
         return Student::where('user_id', $id)->delete();
+    }
+
+    public function analytics()
+    {
+        $total_surveys = count(Performance::all());
+
+        $registered_student = count(Student::all());
+
+        $answered_student = count(Student::all());
+
+        $surveyQuestions = count(SurveyQuestions::all());
+
+        return [
+            'total_surveys' => $total_surveys,
+            'registered_student' => $registered_student,
+            'answered_student' => $answered_student,
+            'surveyQuestions' => $surveyQuestions,
+        ];
     }
 }
