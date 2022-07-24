@@ -31,37 +31,6 @@ class AuthController extends Controller
         return self::user($data);
     }
 
-    protected static function user($user)
-    {
-        $user->student = Student::where('user_id', $user->id)->first();
-
-        return [
-            'user' =>  $user,
-            'token' =>  self::updateToken($user->id),
-            'message' => 'Signed-in',
-        ];
-    }
-
-    protected static function updateToken($id, $abilities = ['*'])
-    {
-        $user = User::find($id)->first();
-
-        $ip = request()->ip();
-
-        $token = $user->createToken("{$user->name}|{$ip}", $abilities);
-
-        $user->remember_token = null;
-
-        $user->save();
-
-        return $token;
-    }
-
-    public function log_out(Request $request)
-    {
-        $request->user()->currentAccessToken()->delete();
-    }
-
     public function register(Request $request)
     {
         $data = (object) $request->all();
@@ -92,5 +61,36 @@ class AuthController extends Controller
         ]);
 
         return  self::user($user);
+    }
+
+    protected static function user($user)
+    {
+        $user->student = Student::where('user_id', $user->id)->first();
+
+        return [
+            'user' =>  $user,
+            'token' =>  self::updateToken($user->id),
+            'message' => 'Signed-in',
+        ];
+    }
+
+    protected static function updateToken($id, $abilities = ['*'])
+    {
+        $user = User::find($id)->first();
+
+        $ip = request()->ip();
+
+        $token = $user->createToken("{$user->name}|{$ip}", $abilities);
+
+        $user->remember_token = null;
+
+        $user->save();
+
+        return $token;
+    }
+
+    public function log_out(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
     }
 }

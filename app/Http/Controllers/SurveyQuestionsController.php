@@ -5,82 +5,38 @@ namespace App\Http\Controllers;
 use App\Models\SurveyQuestions;
 use App\Http\Requests\StoreSurveyQuestionsRequest;
 use App\Http\Requests\UpdateSurveyQuestionsRequest;
+use Illuminate\Http\Request;
 
 class SurveyQuestionsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return SurveyQuestions::get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request)
     {
-        //
+        return SurveyQuestions::create($request->all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreSurveyQuestionsRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSurveyQuestionsRequest $request)
+    public function show(string $id)
     {
-        //
+        return SurveyQuestions::findOrFail($id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SurveyQuestions  $surveyQuestions
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SurveyQuestions $surveyQuestions)
+
+    public function update(Request $request, string $id)
     {
-        //
+        $questions  = SurveyQuestions::findOrFail($id);
+
+        $questions->fill($request->all())->save();
+
+        return $questions;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SurveyQuestions  $surveyQuestions
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SurveyQuestions $surveyQuestions)
+    public function destroy(string $id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateSurveyQuestionsRequest  $request
-     * @param  \App\Models\SurveyQuestions  $surveyQuestions
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateSurveyQuestionsRequest $request, SurveyQuestions $surveyQuestions)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SurveyQuestions  $surveyQuestions
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SurveyQuestions $surveyQuestions)
-    {
-        //
+        return SurveyQuestions::find($id)->delete();
     }
 }

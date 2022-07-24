@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('survey_questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('survey_forms_id');
+            $table->string('survey_form_id');
             $table->timestamps();
             $table->string('title');
             $table->text('question');

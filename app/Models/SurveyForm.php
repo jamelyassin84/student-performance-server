@@ -13,4 +13,9 @@ class SurveyForm extends Model
         'name',
         'question_type',
     ];
+
+    public function questions()
+    {
+        return $this->hasMany(SurveyQuestions::class, 'survey_form_id', 'id');
+    }
 }

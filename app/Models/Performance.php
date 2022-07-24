@@ -10,6 +10,7 @@ class Performance extends Model
     use HasFactory;
 
     protected $fillable = [
+        'student_id',
         'year_level',
         'semester',
         'performance',

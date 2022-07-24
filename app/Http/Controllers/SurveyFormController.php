@@ -5,82 +5,37 @@ namespace App\Http\Controllers;
 use App\Models\SurveyForm;
 use App\Http\Requests\StoreSurveyFormRequest;
 use App\Http\Requests\UpdateSurveyFormRequest;
+use Illuminate\Http\Request;
 
 class SurveyFormController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return SurveyForm::with('questions')->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request)
     {
-        //
+        return SurveyForm::create($request->all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreSurveyFormRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSurveyFormRequest $request)
+    public function show($id)
     {
-        //
+        return SurveyForm::findOrFail($id)->with('questions');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SurveyForm  $surveyForm
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SurveyForm $surveyForm)
+    public function update(Request $request, $id)
     {
-        //
+        $form  = SurveyForm::findOrFail($id);
+
+        $form->fill($request->all())->save();
+
+        return $form;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SurveyForm  $surveyForm
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SurveyForm $surveyForm)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateSurveyFormRequest  $request
-     * @param  \App\Models\SurveyForm  $surveyForm
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateSurveyFormRequest $request, SurveyForm $surveyForm)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SurveyForm  $surveyForm
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SurveyForm $surveyForm)
-    {
-        //
+        return SurveyForm::find($id)->delete();
     }
 }

@@ -12,11 +12,12 @@ class SurveyQuestions extends Model
     protected $fillable = [
         'title',
         'question',
+        'survey_form_id',
         'show_on_website',
         'question_value_type',
     ];
 
     protected $casts = [
-        'question_value_type' => 'boolean',
+        'show_on_website' => 'boolean',
     ];
 }
