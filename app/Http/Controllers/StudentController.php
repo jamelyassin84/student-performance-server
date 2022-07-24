@@ -14,7 +14,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        return User::with('student')->get();
+        return User::with('student')->with('performances')->get();
     }
 
     public function store(StoreStudentRequest $request)

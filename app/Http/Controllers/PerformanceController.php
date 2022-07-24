@@ -10,8 +10,17 @@ use Illuminate\Http\Request;
 class PerformanceController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $data = (object) $request->all();
+
+        $query = Performance::where('student_id', $data->student_id);
+
+        foreach ($data as $key => $value) {
+            $query = $query->where($key, $value);
+        }
+
+        return $query->get();
     }
 
 
