@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SurveyFormController;
 use App\Http\Controllers\SurveyQuestionsController;
@@ -14,4 +15,4 @@ Route::prefix('auth')->as('auth.')->controller(AuthController::class)->group(fun
 Route::resource('students', StudentController::class);
 Route::resource('forms', SurveyFormController::class);
 Route::resource('survey-questions', SurveyQuestionsController::class);
-Route::resource('performances', SurveyQuestionsController::class);
+Route::resource('performances', PerformanceController::class);
