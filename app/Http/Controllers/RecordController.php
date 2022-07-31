@@ -30,6 +30,7 @@ class RecordController extends Controller
             ->with('student')
             ->with('survey_form')
             ->with('survey_form.questions')
+            ->orderBy('created_at', 'DESC')
             ->get();
     }
 
