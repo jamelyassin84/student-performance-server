@@ -2,7 +2,6 @@
 
 use App\Enums\SemesterEnum;
 use App\Enums\YearLevelEnum;
-use App\Models\Student;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,14 +15,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('performances', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('guidance_requests', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
+            $table->string('survey_form_id');
+            $table->string('question_id');
             $table->string('student_id');
             $table->string('year_level')->default(YearLevelEnum::FIRST());
             $table->string('semester')->default(SemesterEnum::FIRST());
-            $table->integer('performance');
-            $table->integer('gpa');
         });
     }
 
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('performances');
+        Schema::dropIfExists('guidance_requests');
     }
 };

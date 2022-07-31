@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GuidanceRequestController;
 use App\Http\Controllers\PerformanceController;
+use App\Http\Controllers\RecordController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SurveyFormController;
 use App\Http\Controllers\SurveyQuestionsController;
@@ -17,3 +19,5 @@ Route::resource('forms', SurveyFormController::class);
 Route::resource('survey-questions', SurveyQuestionsController::class);
 Route::resource('performances', PerformanceController::class);
 Route::get('analytics', [StudentController::class, 'analytics']);
+Route::resource('guidance-request', GuidanceRequestController::class);
+Route::resource('records', RecordController::class);

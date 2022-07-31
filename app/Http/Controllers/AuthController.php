@@ -19,14 +19,14 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $user = (object) $request->only(['email', 'password']);
+        $user = (object) $request->only(['email', 'id_number']);
 
         $data = User::where('email', $user->email)
             ->first();
 
         if (empty($data)) return response('User not Found', 404);
 
-        if (!Hash::check($user->password, $data->password)) return response('Invalid Password', 404);
+        if (!Hash::check($user->id_number, $data->id_number)) return response('Invalid Number', 404);
 
         return self::user($data);
     }
@@ -45,7 +45,7 @@ class AuthController extends Controller
         $user = User::create([
             'email' => $data->email,
             'type' => UserEnum::STUDENT,
-            'password' => Hash::make($data->password)
+            'id_number' => Hash::make($data->id_number)
         ]);
 
         $user->student =  Student::create([
