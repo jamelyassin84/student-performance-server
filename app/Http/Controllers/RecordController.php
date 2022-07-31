@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Record;
-use App\Http\Requests\StoreRecordRequest;
+use Illuminate\Http\Request;
 
 class RecordController extends Controller
 {
 
-    public function store(StoreRecordRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->all();
+        $data = (object) $request->all();
+
         $savedData = [];
 
-        foreach ($data as $record) {
+        foreach ($data->data as $record) {
             $new_record =  Record::create($record);
+
             array_push($savedData, $new_record);
         }
+
         return $savedData;
     }
 

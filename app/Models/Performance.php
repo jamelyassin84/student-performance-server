@@ -14,5 +14,6 @@ class Performance extends Model
         'year_level',
         'semester',
         'performance',
+        'gpa',
     ];
 }

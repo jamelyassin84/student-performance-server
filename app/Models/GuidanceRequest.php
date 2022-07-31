@@ -10,8 +10,6 @@ class GuidanceRequest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'survey_form_id',
-        'question_id',
         'student_id',
         'year_level',
         'semester',

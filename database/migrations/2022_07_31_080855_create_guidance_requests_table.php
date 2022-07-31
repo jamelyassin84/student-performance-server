@@ -18,8 +18,6 @@ return new class extends Migration
         Schema::create('guidance_requests', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('survey_form_id');
-            $table->string('question_id');
             $table->string('student_id');
             $table->string('year_level')->default(YearLevelEnum::FIRST());
             $table->string('semester')->default(SemesterEnum::FIRST());

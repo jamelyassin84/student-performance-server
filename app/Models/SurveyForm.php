@@ -12,6 +12,7 @@ class SurveyForm extends Model
     protected $fillable = [
         'name',
         'question_type',
+        'description'
     ];
 
     public function questions()
