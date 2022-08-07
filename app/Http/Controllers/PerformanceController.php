@@ -28,16 +28,19 @@ class PerformanceController extends Controller
     {
         $data = (object) $request->all();
 
-        $performance = Performance::where('student_id', $data->student_id)
+        $performances = Performance::where('student_id', $data->student_id)
             ->where('year_level', $request->year_level)
             ->where('semester', $request->semester)
-            ->first();
+            ->get();
 
-        if (empty($performance)) {
+        if (count($performances) === 0) {
             return Performance::create($request->all());
         }
 
-        Performance::find($performance->id)->delete();
+        foreach ($performances as $performance) {
+            Performance::find($performance->id)->delete();
+        }
+
 
         return Performance::create($request->all());
     }
