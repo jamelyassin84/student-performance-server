@@ -12,8 +12,7 @@ class GuidanceRequestController extends Controller
     public function index(Request $request)
     {
         return  GuidanceRequest::with('student')
-            ->with('survey_form')
-            ->with('survey_form.questions')
+            ->with('student.performance')
             ->get();
     }
 
@@ -21,8 +20,7 @@ class GuidanceRequestController extends Controller
     {
         return  GuidanceRequest::where('student_id', $student_id)
             ->with('student')
-            ->with('survey_form')
-            ->with('survey_form.questions')
+            ->with('performance')
             ->get();
     }
 

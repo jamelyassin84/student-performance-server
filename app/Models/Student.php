@@ -20,4 +20,9 @@ class Student extends Model
         'address',
         'user_id',
     ];
+
+    public function performance()
+    {
+        return $this->hasOne(Performance::class, 'student_id', 'id');
+    }
 }

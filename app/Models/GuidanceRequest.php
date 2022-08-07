@@ -17,11 +17,6 @@ class GuidanceRequest extends Model
 
     public function student()
     {
-        return $this->hasOne(Student::class, 'id', 'question_id');
-    }
-
-    public function survey_form()
-    {
-        return $this->hasOne(SurveyForm::class, 'id', 'survey_form_id');
+        return $this->hasOne(Student::class, 'id', 'student_id');
     }
 }
