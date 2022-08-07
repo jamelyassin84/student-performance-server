@@ -29,7 +29,7 @@ class LoginRequest extends FormRequest
                 'email',
                 'max:255',
             ],
-            'password' => ['required', 'string', 'max:255'],
+            'id_number' => ['required', 'string', 'max:255'],
         ];
 
         return $rules;

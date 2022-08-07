@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('year_level')->default(YearLevelEnum::FIRST());
             $table->string('semester')->default(SemesterEnum::FIRST());
             $table->integer('performance');
-            $table->integer('gpa');
+            $table->integer('gpa')->default(0);
+            $table->tinyInteger('has_requested')->default(0);
         });
     }
 

@@ -15,5 +15,10 @@ class Performance extends Model
         'semester',
         'performance',
         'gpa',
+        'has_requested',
+    ];
+
+    protected $cast = [
+        'has_requested' => 'boolean'
     ];
 }

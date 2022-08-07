@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GuidanceRequest;
+use App\Models\Performance;
 use Illuminate\Http\Request;
 
 class GuidanceRequestController extends Controller
@@ -28,7 +29,24 @@ class GuidanceRequestController extends Controller
 
     public function store(Request $request)
     {
-        return GuidanceRequest::create($request->all());
+        $data = (object) $request->all();
+
+        if (isset($data->student_id)) {
+
+            $performance = Performance::where(
+                'student_id',
+                $data->student_id
+            )
+                ->where('year_level', $data->year_level)
+                ->where('semester', $data->semester)
+                ->first();
+
+            if (!empty($performance)) {
+                $performance->has_requested = 1;
+            }
+        }
+
+        return GuidanceRequest::updateOrCreate($request->all());
     }
 
 
