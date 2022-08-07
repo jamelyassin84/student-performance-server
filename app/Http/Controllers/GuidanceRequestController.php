@@ -46,7 +46,11 @@ class GuidanceRequestController extends Controller
             }
         }
 
-        return GuidanceRequest::updateOrCreate($request->all());
+        return GuidanceRequest::updateOrCreate([
+            'student_id' => $data->student_id,
+            'year_level' => $data->year_level,
+            'semester' => $data->semester,
+        ]);
     }
 
 

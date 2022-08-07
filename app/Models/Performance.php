@@ -18,7 +18,8 @@ class Performance extends Model
         'has_requested',
     ];
 
-    protected $cast = [
-        'has_requested' => 'boolean'
+
+    protected $casts = [
+        'has_requested' => 'boolean',
     ];
 }
