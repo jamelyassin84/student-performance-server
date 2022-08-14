@@ -14,10 +14,11 @@ Route::prefix('auth')->as('auth.')->controller(AuthController::class)->group(fun
     Route::post('login', 'login')->name('login');
 });
 
+Route::resource('records', RecordController::class);
 Route::resource('students', StudentController::class);
 Route::resource('forms', SurveyFormController::class);
-Route::resource('survey-questions', SurveyQuestionsController::class);
 Route::resource('performances', PerformanceController::class);
 Route::get('analytics', [StudentController::class, 'analytics']);
 Route::resource('guidance-request', GuidanceRequestController::class);
-Route::resource('records', RecordController::class);
+Route::resource('survey-questions', SurveyQuestionsController::class);
+Route::get('recommendations', [RecordController::class, 'recommendations']);
