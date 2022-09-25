@@ -18,6 +18,7 @@ Route::resource('records', RecordController::class);
 Route::resource('students', StudentController::class);
 Route::resource('forms', SurveyFormController::class);
 Route::resource('performances', PerformanceController::class);
+Route::get('performances/by_college/get', [PerformanceController::class, 'by_college']);
 Route::get('analytics', [StudentController::class, 'analytics']);
 Route::resource('guidance-request', GuidanceRequestController::class);
 Route::resource('survey-questions', SurveyQuestionsController::class);

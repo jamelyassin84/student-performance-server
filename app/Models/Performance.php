@@ -22,4 +22,10 @@ class Performance extends Model
     protected $casts = [
         'has_requested' => 'boolean',
     ];
+
+    public function student()
+    {
+
+        return $this->hasOne(Student::class, 'id', 'student_id');
+    }
 }
