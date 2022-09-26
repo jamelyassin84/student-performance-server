@@ -6,6 +6,7 @@ use App\Enums\UserEnum;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\GuidanceRequest;
 use App\Models\Performance;
 use App\Models\SurveyQuestions;
 use App\Models\User;
@@ -74,7 +75,11 @@ class StudentController extends Controller
 
         $registered_student = count(Student::all());
 
-        $answered_student = count(Student::all());
+        $answered_student = count(
+            GuidanceRequest::all()->filter(function (GuidanceRequest $request) {
+                return $request->student !== null;
+            })
+        );
 
         $surveyQuestions = count(SurveyQuestions::all());
 
