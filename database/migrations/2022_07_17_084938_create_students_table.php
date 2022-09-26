@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('degree');
             $table->string('course');
             $table->string('major')->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
         });
     }
 

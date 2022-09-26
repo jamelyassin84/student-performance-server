@@ -14,13 +14,11 @@ class PerformanceController extends Controller
     public function index(Request $request)
     {
         $data = (object) $request->all();
-
         $query = Performance::where('student_id', $data->student_id);
 
         foreach ($data as $key => $value) {
             $query = $query->where($key, $value);
         }
-
         return $query->get();
     }
 
@@ -28,7 +26,6 @@ class PerformanceController extends Controller
     public function store(Request $request)
     {
         $data = (object) $request->all();
-
         $performances = Performance::where('student_id', $data->student_id)
             ->where('year_level', $request->year_level)
             ->where('semester', $request->semester)
@@ -37,7 +34,6 @@ class PerformanceController extends Controller
         if (count($performances) === 0) {
             return Performance::create($request->all());
         }
-
         return response('You already answered a survey in this semester', 402);
     }
 
@@ -53,16 +49,13 @@ class PerformanceController extends Controller
             collect(Performance::with('student')->get())->filter(function (Performance $performance) {
                 return $performance->student !== null;
             })->filter(function (Performance $performance) {
-
                 return  collect([
                     'College of Computer Studies',
                     'College of Nursing',
                     'College of Arts and Sciences',
-                ])
-                    ->contains($performance->student->department);
+                ])->contains($performance->student->department);
             })
             ->map(function (Performance $performance) {
-
                 $records = collect(Record::all()
                     ->where('student_id', $performance->student->user_id)
                     ->where('year_level', $performance->year_level)
@@ -73,9 +66,7 @@ class PerformanceController extends Controller
 
                         return $record;
                     }));
-
                 $performance->records = $records;
-
                 return $performance;
             });
     }
@@ -83,9 +74,7 @@ class PerformanceController extends Controller
     public function update(Request $request, string $id)
     {
         $performance  = Performance::findOrFail($id);
-
         $performance->fill($request->all())->save();
-
         return $performance;
     }
 

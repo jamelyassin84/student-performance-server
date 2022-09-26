@@ -9,14 +9,11 @@ use Illuminate\Http\Request;
 class GuidanceRequestController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
-        $data = $request->all();
-
         $guidance_requests = collect(GuidanceRequest::with('student')
             ->with('student.performance')
             ->get());
-
 
         return  $guidance_requests->filter(function (GuidanceRequest $request) {
             return $request->student !== null;

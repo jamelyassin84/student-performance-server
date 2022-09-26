@@ -18,6 +18,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('id_number')->unique();
+            $table->string('password');
             $table->string('type')->default(UserEnum::STUDENT());
             $table->rememberToken();
             $table->timestamps();

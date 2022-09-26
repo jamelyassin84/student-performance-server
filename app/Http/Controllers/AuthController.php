@@ -45,7 +45,8 @@ class AuthController extends Controller
         $user = User::create([
             'email' => $data->email,
             'type' => UserEnum::STUDENT,
-            'id_number' => Hash::make($data->id_number)
+            'id_number' => Hash::make($data->id_number),
+            'password' => Hash::make($data->id_number)
         ]);
 
         $user->student =  Student::create([
@@ -57,7 +58,7 @@ class AuthController extends Controller
             'degree' => $data->degree,
             'course' => $data->course,
             'major' => $data->major,
-            'address' => $data->address,
+            // 'address' => $data->address,
         ]);
 
         return  self::user($user);
