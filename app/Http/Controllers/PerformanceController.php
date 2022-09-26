@@ -72,7 +72,7 @@ class PerformanceController extends Controller
                             ->first();
 
                         return $record;
-                    }))->unique('survey_form.id');
+                    }));
 
                 $performance->records = $records;
 
