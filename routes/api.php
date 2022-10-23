@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GuidanceRequestController;
+use App\Http\Controllers\ImplicitRatingController;
 use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\StudentController;
@@ -23,3 +24,6 @@ Route::get('analytics', [StudentController::class, 'analytics']);
 Route::resource('guidance-request', GuidanceRequestController::class);
 Route::resource('survey-questions', SurveyQuestionsController::class);
 Route::get('recommendations', [RecordController::class, 'recommendations']);
+
+
+Route::resource('implicit-rating', ImplicitRatingController::class);

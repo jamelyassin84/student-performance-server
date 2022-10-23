@@ -11,6 +11,7 @@ class ImplicitRating extends Model
 
     protected $fillable = [
         'title',
+        'average'
     ];
 
     public function recommendations()

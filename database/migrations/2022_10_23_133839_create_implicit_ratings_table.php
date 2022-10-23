@@ -12,6 +12,7 @@ return new class extends Migration
         Schema::create('implicit_ratings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->float('average');
             $table->timestamps();
         });
     }

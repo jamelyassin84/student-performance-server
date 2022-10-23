@@ -16,20 +16,23 @@ class ImplicitRatingController extends Controller
 
     public function store(Request $request)
     {
-        $form = $request->all();
         $recommendations = collect();
+        $form =  $request->all();
         $implicitRating = ImplicitRating::create($form);
 
         foreach ($form['recommendations'] as $recommendation) {
+            $data =   ImplicitRatingRecommendation::create([
+                'title' => $recommendation['title'],
+                'implicit_rating_id' =>  $implicitRating->id
+            ]);
+
             $recommendations->push(
-                ImplicitRatingRecommendation::create([
-                    'title' => $recommendation->title,
-                    'implicit_rating_id' =>  $implicitRating->id
-                ])
+                $data
             );
         }
 
         $implicitRating->recommendations = $recommendations;
+
         return  $implicitRating;
     }
 
@@ -43,10 +46,11 @@ class ImplicitRatingController extends Controller
     public function destroy(string $id)
     {
         $recommendations = ImplicitRatingRecommendation::where('implicit_rating_id', $id)->get();
+
         foreach ($recommendations as $recommendation) {
             $recommendation->delete();
         }
 
-        return  ImplicitRatingRecommendation::find($id)->delete();;
+        return  ImplicitRating::findOrFail($id)->delete();;
     }
 }
