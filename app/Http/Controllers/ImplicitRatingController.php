@@ -39,7 +39,7 @@ class ImplicitRatingController extends Controller
     public function update(Request $request, string $id)
     {
         $this->destroy($id);
-        $this->store($request);
+        return  $this->store($request);
     }
 
 
