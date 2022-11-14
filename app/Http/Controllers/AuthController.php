@@ -26,9 +26,11 @@ class AuthController extends Controller
 
         if (empty($data)) return response('User not Found', 404);
 
-        if (!Hash::check($user->password, $data->password)) return response('Wrong Password', 404);
+        if (Hash::check($user->password, $data->password)) {
+            return self::user($data);
+        }
 
-        return self::user($data);
+        return response('Wrong Password', 404);
     }
 
     public function register(Request $request)
@@ -46,7 +48,7 @@ class AuthController extends Controller
             'email' => $data->email,
             'type' => UserEnum::STUDENT,
             'id_number' => Hash::make($data->id_number),
-            'password' => Hash::make($data->id_number)
+            'password' => Hash::make($data->password)
         ]);
 
         $user->student =  Student::create([
