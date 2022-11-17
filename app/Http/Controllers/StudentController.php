@@ -41,7 +41,6 @@ class StudentController extends Controller
         $user->update([
             'email' => $user->email,
             'type' => UserEnum::STUDENT,
-            'password' => Hash::make($user->password)
         ]);
 
         $student = Student::where('user_id', $user->id)->first();
