@@ -19,4 +19,14 @@ class GuidanceRequest extends Model
     {
         return $this->hasOne(Student::class, 'id', 'student_id');
     }
+
+    public function performance()
+    {
+        return $this->hasOne(Student::class, 'id', 'student_id');
+    }
+
+    public function performances()
+    {
+        return $this->hasMany(Performance::class, 'student_id', 'student_id');
+    }
 }

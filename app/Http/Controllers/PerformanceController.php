@@ -48,12 +48,6 @@ class PerformanceController extends Controller
         return
             collect(Performance::with('student')->get())->filter(function (Performance $performance) {
                 return $performance->student !== null;
-            })->filter(function (Performance $performance) {
-                return  collect([
-                    'College of Computer Studies',
-                    'College of Nursing',
-                    'College of Arts and Sciences',
-                ])->contains($performance->student->department);
             })
             ->map(function (Performance $performance) {
                 $records = collect(Record::all()

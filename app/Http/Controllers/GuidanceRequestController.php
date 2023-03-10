@@ -4,19 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\GuidanceRequest;
 use App\Models\Performance;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class GuidanceRequestController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $guidance_requests = collect(GuidanceRequest::with('student')
-            ->with('student.performance')
-            ->get());
+        $data =  $request->all();
 
-        return  $guidance_requests->filter(function (GuidanceRequest $request) {
-            return $request->student !== null;
+        $builder = GuidanceRequest::with('student')->with('student.performance')->with('performances');
+
+        if (isset($data['from']) || isset($data['to'])) {
+            $builder->whereBetween('created_at', [$data['from'], $data['to']]);
+        }
+
+        $guidance_requests = collect($builder->get());
+
+        return $guidance_requests->filter(function (GuidanceRequest $request) {
+            $request->performance = collect($request->performances)
+                ->where('year_level', $request->year_level)
+                ->where('semester', $request->semester)
+                ->first();
+
+            return true;
         })->toArray();
     }
 
